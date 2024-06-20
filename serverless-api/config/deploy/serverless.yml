@@ -1,0 +1,382 @@
+service: iw-web-api
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: staging
+  region: ap-northeast-1
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - cognito-identity:*
+        - cognito-idp:*
+        - cognito-sync:*
+        - iam:ListRoles
+        - iam:ListOpenIdConnectProviders
+        - iam:GetRole
+        - iam:ListSAMLProviders
+        - iam:GetSAMLProvider
+        - kinesis:ListStreams
+        - lambda:GetPolicy
+        - lambda:ListFunctions
+        - sns:GetSMSSandboxAccountStatus
+        - sns:ListPlatformApplications
+        - ses:ListIdentities
+        - ses:GetIdentityVerificationAttributes
+        - mobiletargeting:GetApps
+        - acm:ListCertificates
+        - ec2:CreateNetworkInterface
+        - ec2:DescribeNetworkInterfaces
+        - ec2:DeleteNetworkInterface
+      Resource:
+        - "*"
+
+plugins:
+  - serverless-plugin-split-stacks
+
+package:
+  individually: true
+  exclude: ./**
+  include:
+    - ../../**
+
+functions:
+  api:
+    handler: functions/api/lambda.handler
+    events:
+      - http:
+          path: /master/getPrefecture
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getMunicipality
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getItemMajorClass
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getItemMinorClass
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getCode
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getCategory
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getBankName
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /master/getBankBranchName
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /notification/getNotification
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /notification/getNotificationForAdmin
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /notification/getReportForAdmin
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /notification/getNotificationApp
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /notification/getNumberOfNotifications
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/getContractor
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/getContractorInfo
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/checkUniqueLoginIdForContractor
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/putContractor
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/searchContractor
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/getApprovalStatus
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/getReferralSource
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/searchContractorForApplication
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /contractor/insertContractor
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /job/getJobStatus
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /job/postJob
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /job/putJobStatus
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /pushnotification/searchPushNotification
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /pushnotification/getPushNotification
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /pushnotification/postPushNotification
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /pushnotification/checkPushNotification
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /review/searchReview
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /review/deleteReview
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /review/getReview
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /review/getAcquisitionMonth
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /review/usergetReview
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      -http:
+          path: review/localgetReview
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /surplussoildisposal/searchSurplusSoilDisposalSite
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /surplussoildisposal/getSurplusSoilDisposalSite
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /surplussoildisposal/postSurplusSoilDisposalSite
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /surplussoildisposal/updateSurplusSoilDisposalSite
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/searchEmployee
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/getEmployee
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/getRegistrationNumber
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/postEmployee
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/updateEmployee
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /employee/deleteEmployee
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /basicInfo/getBasicInfo
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /basicInfo/putBasicInfo
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/getItemUnitPriceData
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/getItemUnitPriceList
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/getDisposalAcceptableDate
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/getSaleAcceptableDate
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/getWorkableDate
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /itemunitprice/putItemUnitPrice
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /filemanager/getUploadUrl
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /filemanager/getCommonUploadUrl
+          method: ANY
+          private: true
+          cors:
+            origin: "*"
+      - http:
+          path: /{proxy+}
+          method: ANY
+          private: true
+          cors:
+            origin: "*"

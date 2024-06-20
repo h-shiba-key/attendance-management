@@ -1,0 +1,77 @@
+.textbox {
+    margin-top: 20px; /* 任意の値を指定してください */
+}
+body.no_scroll{
+    overflow: hidden;
+ }
+ .text{
+    font-size:30px;
+ }
+ .leftBorder{
+    border-left: 5px solid #01579b;
+ }
+
+ .leftVerticalBar{
+    position:fixed;
+    top:0;
+    left:0;
+    width:20px; /*縦の色付き領域の幅*/
+    height:100vh; /*画面の高さいっぱいにする*/
+    background-color: #01579b; /*縦の背景色*/
+ }
+
+ .custom-textfield{
+   width:300px;
+ }
+
+.dashed-border{
+   border: 2px dashed red;
+}
+
+ .table{
+    width:60%;
+ }
+
+ .position{
+   position:0;
+   margin:auto;
+   width:1;
+   height:1;
+ }
+
+ .custom-button{
+   background-color:red;
+   color: white;
+ }
+
+ .back-color{
+   background-color: grey;
+ }
+
+ .body{
+   overflow-y:hidden;
+ }
+
+ .formContainer{
+   height:100vh;
+   width:100%;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .formContainer form{
+   background-color: white;
+   width:70%;
+   max-width:450px;
+   padding:30px;
+ }
+
+ .uiForm{
+   display:flex;
+ }
+
+ .formField{
+   display: flex;
+   flex-direction: column;
+ }
